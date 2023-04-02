@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Welcome to Barbarrr.link</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+    
+    <body>
+    <% if(url !='' ) { %>
+        <div class="alert alert-success" role="alert">
+            Url berhasil disimpan
+        </div>
+    <% } else { %>
+        <div class="alert alert-danger" role="alert">
+            Shortened Url sudah ada!
+          </div>
+    <% } %>
+    <h1 style="text-align: center;">Welcome to Barbarrr.link</h1>
+    <div class="container min-vh-100 d-flex justify-content-center align-items-center">
+        <form action="/urls" method="POST">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Please input your URL</label>
+                <input class="form-control" type="url" placeholder="Input URL" name="urlOriginal">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">The desired shortened URL</label>
+                <input class="form-control" type="text" placeholder="yourcustomurl" name="urlShortened">
+                <small id="emailHelp" class="form-text text-muted">the shortened URL will be /yourcustomurl</small>
+            </div>
+            <div class="row justify-content-center">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>
