@@ -1,14 +1,17 @@
 const express = require("express");
 const app = express();
 const path = require('path');
-const PORT = 3000;
 const mongoose = require("mongoose");
 const Url = require("./models/url")
 const sessionNow = require('express-session');
 const cookieParser = require('cookie-parser')
 const flashMessage = require("connect-flash");
+const dotenv = require('dotenv').config();
+const PORT = process.env.PORT;
 
-mongoose.connect('mongodb://127.0.0.1/urls', { useNewUrlParser: true, useUnifiedTopology: true })
+
+
+mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(
         () => {
             console.log("CONNECTION TO MONGODB OPEN!");
@@ -58,7 +61,6 @@ app.get('/:shortUrl', async (req, res) => {
 
     const urlObject = await Url.findOne({ urlShortened: shortUrl }).exec();
 
-    console.log(urlObject.urlOriginal);
 
     if (urlObject == null) {
         return res.sendStatus(404);
