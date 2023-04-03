@@ -32,9 +32,11 @@ app.use(cookieParser('keyboard cat'));
 app.use(sessionNow({ cookie: { maxAge: 60000 }, secret: "urlshortener", saveUninitialized: false, resave: false }));
 app.use(flashMessage());
 
+
 app.get('/', (req, res) => {
     const url = req.flash('url');
-    res.render("homepage.ejs", { url });
+    var shortenedUrl = req.protocol + '://' + req.get('host') + req.originalUrl +url
+    res.render("homepage.ejs", { url, shortenedUrl });
 });
 
 app.post('/urls', async (req, res) => {
@@ -44,7 +46,7 @@ app.post('/urls', async (req, res) => {
     }
     await newUrl.save()
         .then(() => {
-            req.flash('url', req.body.urlOriginal);
+            req.flash('url', req.body.urlShortened);
             res.redirect('/');
         })
         .catch((err) => {
